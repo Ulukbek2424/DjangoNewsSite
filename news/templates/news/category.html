@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
 
 {% block title %}
-  {{ title }} :: {{ block.super }}
+  {{ category.title }} :: {{ block.super }}
 {% endblock %}
+
 
 {% block sidebar %}
 <div class="col-md-3">
@@ -20,7 +21,7 @@
 {% for item in news %}
 <div class="card mb-3">
   <div class="card-header">
-    Категория: <a href="{% url 'category' item.category.pk %}">{{ item.category }}</a>
+    Категория: {{ item.category }}
   </div>
   <div class="card-body">
     <div class="media">
