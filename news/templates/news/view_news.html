@@ -1,9 +1,8 @@
 {% extends 'base.html' %}
 
 {% block title %}
-  {{ category.title }} :: {{ block.super }}
+  {{ news_item.title }} :: {{ block.super }}
 {% endblock %}
-
 
 {% block sidebar %}
   {% include 'inc/_sidebar.html' %}
@@ -11,28 +10,25 @@
 
 
 {% block content %}
-{% for item in news %}
 <div class="card mb-3">
   <div class="card-header">
-    Категория: {{ item.category }}
+    Категория: <a href="{{ news_item.category.get_absolute_url }}">{{ news_item.category }}</a>
   </div>
   <div class="card-body">
     <div class="media">
-      {% if item.photo %}
-        <img src="{{ item.photo.url }}" alt="" width="350px" height="200px" class="mr-3">
+      {% if news_item.photo %}
+        <img src="{{ news_item.photo.url }}" alt="" width="350px" height="200px" class="mr-3">
       {% else %}
         <img src="https://picsum.photos/id/1060/350/200?blur=2" alt="" class="mr-3">
       {% endif %}
       <div class="media-body">
-        <h5 class="card-title">{{ item.title }}</h5>
-        <p class="card-text">{{ item.content|linebreaks|truncatewords:50 }}</p>
-        <a href="{{ item.get_absolute_url }}" class="btn btn-primary">Read more...</a>
+        <h5 class="card-title">{{ news_item.title }}</h5>
+        <p class="card-text">{{ news_item.content|linebreaks }}</p>
       </div>
     </div>
   </div>
   <div class="card-footer text-muted">
-    {{ item.created_at|date:"Y-m-d H:i:s" }}
+    {{ news_item.created_at|date:"Y-m-d H:i:s" }}
   </div>
 </div>
-{% endfor %}
 {% endblock %}
